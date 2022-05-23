@@ -45,11 +45,11 @@ public class AddressBook {
                     int choice = scanner.nextInt();
                     switch (choice){
                         case 1:
-                            System.out.println("Enter the new Name: ");
+                            System.out.println("Enter the first Name: ");
                             contacts.setFirstName(scanner.next());
                             break;
                         case 2:
-                            System.out.println("Enter the new last name: ");
+                            System.out.println("Enter the last name: ");
                             contacts.setLastName(scanner.next());
                             break;
                         case 3:
