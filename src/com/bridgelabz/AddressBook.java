@@ -38,12 +38,12 @@ public class AddressBook {
 
         System.out.println("Please enter the first name to edit the contact: ");
         String fName = scanner.next();
-        for (int i = 0; i < contactsList.size(); i++){
-            if(fName.equals(contacts.getFirstName())){
-                while (true){
+        for (int i = 0; i < contactsList.size(); i++) {
+            if (fName.equals(contacts.getFirstName())) {
+                while (true) {
                     System.out.println("Enter choice to edit: 1)firstName\n2)lastName\n3)address\n4)city\n5)state\n6)zip\n7)phoneNumber\n8)email\n9)exit");
                     int choice = scanner.nextInt();
-                    switch (choice){
+                    switch (choice) {
                         case 1:
                             System.out.println("Enter the first Name: ");
                             contacts.setFirstName(scanner.next());
@@ -77,13 +77,30 @@ public class AddressBook {
                             contacts.setEmail(scanner.next());
                             break;
                     }
-                    if(choice==9);
+                    if (choice == 9) ;
                     break;
                 }
-                contactsList.set(i,contacts);
+                contactsList.set(i, contacts);
                 System.out.println("After editing........");
                 System.out.println(contactsList);
             }
+        }
+    }
+
+    public void deleteContact() {
+
+        System.out.println("Enter the first name to search and delete: ");
+        String fName = scanner.next();
+        for (int i = 0; i < contactsList.size(); i++) {
+            if (fName.equals(contacts.getFirstName())) {
+                contactsList.remove(i);
+            }
+        }
+        System.out.println("Contacts after deletion");
+        if (contactsList.isEmpty() != true) {
+            System.out.println(contactsList);
+        } else {
+            System.out.println("Contacts deleted");
         }
     }
 }
