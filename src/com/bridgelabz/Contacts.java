@@ -1,5 +1,7 @@
 package com.bridgelabz;
 
+import static com.bridgelabz.AddressBook.scanner;
+
 public class Contacts {
     private String firstName;
     private String lastName;
@@ -100,5 +102,11 @@ public class Contacts {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    protected void displayContacts() {
+        System.out.println("First Name: " + firstName + "\n" + "Last Name: " + lastName + "\n"
+                + "Address: " + address + "\n" + "City: " + city + "\n" + "State: " + state + "\n"
+                + "Zip: " + zip + "\n" + "Phone Number: " + phoneNumber + "\n" + "Email: " + email);
     }
 }
