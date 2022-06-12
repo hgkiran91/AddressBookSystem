@@ -3,17 +3,34 @@ package com.bridgelabz;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class AddressBook extends Contacts {
+public class AddressBook {
 
+    private String addressBookName;
     static Scanner scanner = new Scanner(System.in);
     List<Contacts> contactsList = new CopyOnWriteArrayList<>();
-    Map<String, Contacts> contactsMap = new HashMap<>();
+    //Map<String, Contacts> contactsMap = new HashMap<>();
 
-//    static Contacts contacts = new Contacts();
+    public AddressBook() {
+    }
+
+    public String getAddressBookName() {
+        return addressBookName;
+    }
+
+    public void setAddressBookName(String addressBookName) {
+        this.addressBookName = addressBookName;
+    }
+
+    @Override
+    public String toString() {
+        return "AddressBook{" +
+                "addressBookName='" + addressBookName + '\'' +
+                '}';
+    }
+
+    //    static Contacts contacts = new Contacts();
 //    static Contacts contacts1 = new Contacts();
-
     public void addContact() {
-
         Contacts contacts = new Contacts();
         System.out.println("Please enter your first name: ");
         contacts.setFirstName(scanner.next());
@@ -38,16 +55,14 @@ public class AddressBook extends Contacts {
     public void editContact() {
         System.out.println("Please enter the first name to edit the contact: ");
         String fName = scanner.next();
-        Contacts contacts = new Contacts();
-        for (Contacts contacts1 : contactsList) {
+        contactsList.stream().forEach(contacts -> {
             if (fName.equals(contacts.getFirstName())) {
                 updateContacts(contacts);
-            } else {
-                System.out.println("Entered Name is not present in the Address Book to edit");
-                System.out.println("Please enter if you want to add New Contact to the Address Book:");
+            }else {
+                System.out.println("Entered contact is not present");
                 addContact();
             }
-        }
+        });
     }
 
     public void updateContacts(Contacts contacts) {
@@ -68,6 +83,7 @@ public class AddressBook extends Contacts {
         contacts.setPhoneNumber(scanner.next());
         System.out.println("Please enter your email: ");
         contacts.setEmail(scanner.next());
+        contactsList.add(contacts);
     }
 
     public void contactOperation() {
@@ -113,31 +129,33 @@ public class AddressBook extends Contacts {
         for (Contacts contacts : contactsList) {
             if (fName.equals(contacts.getFirstName())) {
                 contacts.displayContacts();
-                break;
+            }else {
+                System.out.println("No such contacts....");
             }
-//            else {
-//                System.out.println("Entered Name is not present in the Address Book");
-//                System.out.println("Please enter if you want to add New Contact to the Address Book:");
-//                addContact();
-//            }
         }
     }
 
     public void deleteContact() {
-        System.out.println("Enter the first name to search and delete: ");
-        String fName = scanner.next();
-        contactsList.stream().forEach(contacts -> {
-            if (contacts.getFirstName() == fName) {
-                contactsList.remove(contacts);
+        Contacts contacts;
+        System.out.println("Enter first name: ");
+        String firstName = scanner.next();
+        for (int i = 0; i < contactsList.size(); i++) {
+            contacts=contactsList.get(i);
+            if (contacts.getFirstName().equals(firstName)) {
+                contactsList.remove(i);
+                System.out.println("Deleted contact successfully");
             }
-        });
+        }
     }
 
     public void addMultipleContact() {
-
-        Contacts contacts = new Contacts();
+//        Contacts contacts = new Contacts();
         addContact();
-        contactsMap.put(contacts.getFirstName(), contacts);
+//        contactsMap.put(contacts.getFirstName(), contacts);
+    }
+
+    public void displayAddressBook() {
+        System.out.println("Address Book Name: " + addressBookName);
     }
 }
 
