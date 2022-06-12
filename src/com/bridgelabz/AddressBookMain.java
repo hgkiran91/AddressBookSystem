@@ -20,10 +20,11 @@ public class AddressBookMain {
 
     static void addMultipleAddressBook() {
         AddressBook addressBook = new AddressBook();
-        if (addressBookMap.get(addressBook.getAddressBookName()) != null) {
-            addressBook.contactOperation();
-        }else {
+        if (addressBookMap.get(addressBook.getAddressBookName()) == null) {
             addAddressBook();
+            addressBook.contactOperation();
+        } else{
+            System.out.println("Address Book name already exists:");
         }
     }
 
@@ -53,5 +54,7 @@ public class AddressBookMain {
         AddressBook addressBook = new AddressBook();
         //addressBook.contactOperation();
         addressBookOperation();
+//        addressBook.addContact();
+//        addressBook.checkDuplicateEntry();
     }
 }

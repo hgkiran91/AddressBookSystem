@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Predicate;
 
 public class AddressBook {
 
@@ -58,7 +59,7 @@ public class AddressBook {
         contactsList.stream().forEach(contacts -> {
             if (fName.equals(contacts.getFirstName())) {
                 updateContacts(contacts);
-            }else {
+            } else {
                 System.out.println("Entered contact is not present");
                 addContact();
             }
@@ -129,7 +130,7 @@ public class AddressBook {
         for (Contacts contacts : contactsList) {
             if (fName.equals(contacts.getFirstName())) {
                 contacts.displayContacts();
-            }else {
+            } else {
                 System.out.println("No such contacts....");
             }
         }
@@ -140,7 +141,7 @@ public class AddressBook {
         System.out.println("Enter first name: ");
         String firstName = scanner.next();
         for (int i = 0; i < contactsList.size(); i++) {
-            contacts=contactsList.get(i);
+            contacts = contactsList.get(i);
             if (contacts.getFirstName().equals(firstName)) {
                 contactsList.remove(i);
                 System.out.println("Deleted contact successfully");
@@ -151,11 +152,24 @@ public class AddressBook {
     public void addMultipleContact() {
 //        Contacts contacts = new Contacts();
         addContact();
+        checkDuplicateEntry();
 //        contactsMap.put(contacts.getFirstName(), contacts);
     }
 
     public void displayAddressBook() {
         System.out.println("Address Book Name: " + addressBookName);
+    }
+
+    public void checkDuplicateEntry() {
+        System.out.println("Enter the First Name:");
+        String fName = scanner.next();
+        contactsList.stream().forEach(x -> {
+            if (x.getFirstName().equals(fName)) {
+                System.out.println("Name already exists:");
+            }else {
+                addContact();
+            }
+        });
     }
 }
 
