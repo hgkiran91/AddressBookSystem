@@ -80,6 +80,15 @@ public class AddressBookMain {
         return cityCounter.get();
     }
 
+    private static void sortContact(List<Contacts> contacts) {
+        List<Contacts> listObject =
+                contacts.stream().sorted((o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName())).collect(Collectors.toList());
+        //System.out.println(listObject);
+        for (Contacts contacts1 : listObject) {
+            System.out.println(contacts1);
+        }
+    }
+
     static void addressBookOperation() {
         int choice;
         do {
