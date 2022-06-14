@@ -53,13 +53,26 @@ public class AddressBookMain {
         System.out.println(addressBook.contactsList);
     }
 
+    static void viewPerson() {
+        AddressBook addressBook = new AddressBook();
+        for (Map.Entry<String, AddressBook> addressBookEntry : addressBookMap.entrySet()) {
+            AddressBook addressBook1 = addressBookEntry.getValue();
+            addressBook1.contactsList.stream().forEach(x->{
+                if (cityContactMap.containsKey(x.getCity())) {
+                    System.out.println(cityContactMap.get(x.getFirstName()));
+                }
+            });
+        }
+    }
+
     static void addressBookOperation() {
         int choice;
         do {
             System.out.println("Enter Choice");
             System.out.println("1: To add Multiple Address Book");
             System.out.println("2: Search Person by City");
-            System.out.println("3: Exit");
+            System.out.println("3: View Person by city");
+            System.out.println("4: Exit");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -69,12 +82,15 @@ public class AddressBookMain {
                     searchPerson();
                     break;
                 case 3:
-                    System.exit(3);
+                    viewPerson();
+                    break;
+                case 4:
+                    System.exit(4);
                 default:
                     System.out.println("Enter choices");
                     addressBookOperation();
             }
-        } while (choice != 3);
+        } while (choice != 4);
     }
 
     public static void main(String[] args) {
