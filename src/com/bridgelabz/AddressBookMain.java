@@ -1,7 +1,9 @@
 package com.bridgelabz;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 
 public class AddressBookMain {
@@ -57,12 +59,25 @@ public class AddressBookMain {
         AddressBook addressBook = new AddressBook();
         for (Map.Entry<String, AddressBook> addressBookEntry : addressBookMap.entrySet()) {
             AddressBook addressBook1 = addressBookEntry.getValue();
-            addressBook1.contactsList.stream().forEach(x->{
+            addressBook1.contactsList.stream().forEach(x -> {
                 if (cityContactMap.containsKey(x.getCity())) {
                     System.out.println(cityContactMap.get(x.getFirstName()));
                 }
             });
         }
+    }
+
+    private static int countOfContact(String cityStateName, Map<String, List<Contacts>> addressBookHashMap) {
+        AtomicInteger cityCounter = new AtomicInteger();
+        addressBookHashMap
+                .values()
+                .forEach(value -> {
+                    value.forEach(x -> {
+                        if (x.getCity().equals(cityStateName) || x.getState().equals(cityStateName))
+                            cityCounter.getAndIncrement();
+                    });
+                });
+        return cityCounter.get();
     }
 
     static void addressBookOperation() {
