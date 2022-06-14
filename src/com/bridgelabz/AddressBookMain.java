@@ -89,6 +89,22 @@ public class AddressBookMain {
         }
     }
 
+    private static void sortAddressBookCityStateZip(int option, List<Contacts> contact) {
+        List<Contacts> listObject = null;
+        if (option == 1) {
+            listObject = contact.stream().sorted((o1, o2) -> o1.getCity().compareTo(o2.getCity())).collect(Collectors.toList());
+        }
+        if (option == 2) {
+            listObject = contact.stream().sorted((o1, o2) -> o1.getState().compareTo(o2.getState())).collect(Collectors.toList());
+        }
+        if (option == 3) {
+            listObject = contact.stream().sorted((o1, o2) -> o1.getZip().compareTo(o2.getZip())).collect(Collectors.toList());
+        }
+        for (Contacts contacts : listObject) {
+            System.out.println(contact);
+        }
+    }
+
     static void addressBookOperation() {
         int choice;
         do {
